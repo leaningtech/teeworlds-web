@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" style="height:100%;">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimal-ui" />
+		<link rel="icon" type="image/png" href=".icon.png">
+		<title>TeeWorlds Server - Web edition</title>
+		<style>
+			table {
+				border-collapse: collapse;
+			}
+			th, td {
+				padding: 8px;
+				text-align: left;
+				border-bottom: 1px solid #ddd;
+			}
+			tr:hover {background-color:#f5f5f5;}
+			td > a {
+				width: 100%;
+				height: 100%;
+				display: block;
+			}
+		</style>
+	</head>
+	<body style="height:100%;margin:0;">
+		<div id="conf">
+			<input id="name" type="text" placeholder="Server name"></input>
+			<br/>
+			<select id="map">
+				<option value="dm1">dm1</option>
+				<option value="dm2">dm2</option>
+			</select>
+			<br/>
+			<select id="gametype" hidden>
+				<option value="dm">dm</option>
+				<option value="ctf">ctf</option>
+				<option value="tdm">tdm</option>
+				<option value="lms">lms</option>
+				<option value="lts">lts</option>
+			</select>
+			<br/>
+			<input id="scorelimit" type="number" min="1" value="20"></input>
+			<br/>
+			<input id="timelimit" type="number" min="0" value="0"></input>
+			<br/>
+		</div>
+		<input id="start" type="button" value="Start new server"></input>
+		<div id="clientlink"></div>
+		<table id="serverlist">
+			<tr class="tableHeader">
+				<th>Server Name</th>
+				<th>Map</th>
+				<th>Players</th>
+				<th>Region</th>
+				<th>Latency</th>
+			</tr>
+		</table>
+		
+		<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js"></script>
+		<script src="webrtc.js"></script>
+		<script>
+			var startElem = document.getElementById("start");
+			let confElem = document.getElementById("conf");
+			startElem.onclick=function()
+			{
+				let conf = {};
+				for (let i = 0; i < confElem.children.length; i++)
+				{
+					let c = confElem.children[i];
+					if (c.tagName == "INPUT" || c.tagName == "SELECT")
+					{
+						conf[c.id] = c.value;
+						c.disabled = true;
+					}
+				}
+				startElem.disabled = true;
+				if (start.promise !== undefined)
+				{
+					start.promise.then(function() {
+						start(conf);
+					});
+				}
+				else
+				{
+					start(conf);
+				}
+			};
+			var table = document.getElementById("serverlist");
+			var servers = [];
+			function makeTr(row)
+			{
+				var tr = document.createElement("tr");
+				var cols = ["name", "map", "players", "continent", "latency"];
+				cols.forEach(function(n) {
+					var td = document.createElement("td");
+					var a = document.createElement("a");
+					a.href = "/teeworlds.html#"+row.key;
+					td.appendChild(a);
+					tr.appendChild(td);
+				});
+				updateTr(tr, row);
+				return tr;
+			}
+			function updateTr(tr, row)
+			{
+				var cols = ["name", "map", "players", "continent", "latency"];
+				cols.forEach(function(n, i) {
+					var td = tr.children[i];
+					var a = td.children[0];
+					if (a.innerText != row[n])
+						a.innerText = row[n];
+				});
+			}
+			function addServerRow(row)
+			{
+				var idx = 0;
+				for (; idx < servers.length; idx++)
+				{
+					if (servers[idx].latency >= row.latency)
+						break;
+				}
+				servers.splice(idx, 0, row);
+				table.insertBefore(makeTr(row), table.children[idx+1]);
+			}
+			function updateServerRow(row)
+			{
+				var idx = 0;
+				for (; idx < servers.length; idx++)
+				{
+					if (servers[idx].key == row.key)
+						break;
+				}
+				if (idx == servers.length)
+					return;
+				var tr = table.children[idx+1];
+				updateTr(tr, row);
+				servers[idx] = row;
+			}
+			function removeServerRow(key)
+			{
+				var idx = 0;
+				for (; idx < servers.length; idx++)
+				{
+					if (servers[idx].key == key)
+						break;
+				}
+				if (idx == servers.length)
+					return;
+				var tr = table.children[idx+1];
+				tr.remove();
+				servers.splice(idx, 1);
+			}
+		</script>
+		<script src="teeworlds_srv.js"></script>
+	</body>
+</html>
