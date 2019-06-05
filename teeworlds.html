@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" style="height:100%;">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimal-ui" />
+    <link rel="icon" type="image/png" href=".icon.png">
+    <title>TeeWorlds - Web edition</title>
+  </head>
+  <body style="height:100%;margin:0;">
+  <canvas style="margin:0;display:block;-ms-touch-action:none;touch-action:none;-ms-content-zooming:none;content-zooming:none;width:100%;height:100%;" id="gamecanvas" width="800" height="600">
+  </canvas>
+  <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js"></script>
+  <script src="teeworlds.js"></script>
+  <div id="overlay" style="position:fixed;background:rgba(0,0,0,0.8);top:0;bottom:0;right:0;left:0;display:flex;justify-content:center;align-items:center;color:white;font-size:36px;">Click to play<div style="position:fixed;bottom:0;right:0;padding:5px;">
+  </div>
+  <script src="webrtc.js"></script>
+  </body>
+</html>
