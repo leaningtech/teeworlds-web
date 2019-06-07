@@ -73,12 +73,25 @@
         <h1> Click to Play</h1>
       `;
     }
-
-    function start() {
+    function loadGame()
+    {
       let script = document.createElement("script");
       script.src = "teeworlds.js";
       document.body.appendChild(script);
+    }
+    function start()
+    {
       startLoadingScreen();
+      // Basic detection of mobile browsers, add a button to play anyway to deal with false positives
+      let isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      if(isMobile)
+      {
+        overlay.innerHTML = "<h2>Sorry!</h2><p>This game requires a mouse, so it only works on desktop browsers</p><p><button onclick='loadGame()'>Play anyway</button></p>"
+      }
+      else
+      {
+        loadGame();
+      }
     }
     start();
   </script>
