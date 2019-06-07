@@ -73,11 +73,16 @@
         <h1> Click to Play</h1>
       `;
     }
+
+    function start() {
+      let script = document.createElement("script");
+      script.src = "teeworlds.js";
+      document.body.appendChild(script);
+      startLoadingScreen();
+    }
+    start();
   </script>
   <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js"></script>
-  <script src="teeworlds.js"></script>
-  </div>
-  <script src="webrtc.js"></script>
   </body>
 </html>
