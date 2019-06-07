@@ -60,7 +60,18 @@
     }
     function endLoadingScreen()
     {
-      overlay.innerText = "Click to Play"
+      overlay.innerHTML = `
+        <h2>Default Controls</h2>
+        <p>Move Left/Right: a / d</p>
+        <p>Jump: Space</p>
+        <p>Fire: Mouse1</p>
+        <p>Hook: Mouse2</p>
+        <p>Switch Weapon: Mouse Wheel / 1-5</p>
+        <p>Chat: t</p>
+        <p>Scoreboard: TAB</p>
+        <p>Back/Menu: F12</p>
+        <h1> Click to Play</h1>
+      `;
     }
   </script>
   <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
