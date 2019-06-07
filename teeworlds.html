@@ -75,13 +75,13 @@
     }
     function loadGame()
     {
+      startLoadingScreen();
       let script = document.createElement("script");
       script.src = "teeworlds.js";
       document.body.appendChild(script);
     }
     function start()
     {
-      startLoadingScreen();
       // Basic detection of mobile browsers, add a button to play anyway to deal with false positives
       let isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
       if(isMobile)
