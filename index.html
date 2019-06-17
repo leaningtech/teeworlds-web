@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1.0,maximum-scale=1.0,minimal-ui" />
 		<link rel="icon" type="image/png" href=".icon.png">
-		<title>TeeWorlds Server - Web edition</title>
+		<title>Teeworlds Server - Web edition</title>
 		<style>
 			table {
 				border-collapse: collapse;
@@ -20,47 +20,90 @@
 				height: 100%;
 				display: block;
 			}
+
+			label {
+				display: block;
+			}
+			#content {
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+				width: 100%;
+			}
 		</style>
 	</head>
-	<body style="height:100%;margin:0;">
-		<div id="conf">
-			<input id="name" type="text" placeholder="Server name"></input>
-			<br/>
-			<select id="map">
-				<option value="dm1">dm1</option>
-				<option value="dm2">dm2</option>
-				<option value="dm3">dm3</option>
-				<option value="dm6">dm6</option>
-				<option value="dm7">dm7</option>
-				<option value="dm8">dm8</option>
-				<option value="dm9">dm9</option>
-			</select>
-			<br/>
-			<select id="gametype" hidden>
-				<option value="dm">dm</option>
-				<option value="ctf">ctf</option>
-				<option value="tdm">tdm</option>
-				<option value="lms">lms</option>
-				<option value="lts">lts</option>
-			</select>
-			<br/>
-			<input id="scorelimit" type="number" min="1" value="20"></input>
-			<br/>
-			<input id="timelimit" type="number" min="0" value="0"></input>
-			<br/>
+	<body>
+		<h1>Teeworlds - Web Edition</h1>
+		<div id="content">
+			<div id="game">
+				<div id="conf">
+					<h3>Create New Server</h3>
+					<label for="name">Server Name</label>
+					<input id="name" type="text" required></input>
+					<br/>
+					<label for="map">Map</label>
+					<select id="map">
+						<option value="dm1">dm1</option>
+						<option value="dm2">dm2</option>
+						<option value="dm3">dm3</option>
+						<option value="dm6">dm6</option>
+						<option value="dm7">dm7</option>
+						<option value="dm8">dm8</option>
+						<option value="dm9">dm9</option>
+					</select>
+					<br/>
+					<select id="gametype" hidden>
+						<option value="dm">dm</option>
+						<option value="ctf">ctf</option>
+						<option value="tdm">tdm</option>
+						<option value="lms">lms</option>
+						<option value="lts">lts</option>
+					</select>
+					<br/>
+					<label for="scorelimit">Score Limit</label>
+					<input id="scorelimit" type="number" min="1" value="20"></input>
+					<br/>
+					<label for="timelimit">Time Limit</label>
+					<input id="timelimit" type="number" min="0" value="0"></input>
+					<br/>
+				</div>
+				<input id="start" type="button" value="Start new server"></input>
+				<br/>
+				<div>
+					<h3>Active Servers</h3>
+					<table id="serverlist">
+						<tr class="tableHeader">
+							<th>Server Name</th>
+							<th>Map</th>
+							<th>Players</th>
+							<th>Region</th>
+							<th>Latency</th>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div id="descr">
+				<h3>Description</h3>
+				<p>
+					<a href="https://www.teeworlds.com/">Teeworlds</a> is a retro multiplayer shooter game.
+					<br/>
+					This unofficial version runs in your browser thanks to the <a href="">Cheerp compiler</a>.
+				</p>
+				<p>
+					On the right you can create a new server, or join an existing one.
+					<br/>
+					In either case, click on a server link to play.
+					<br/>
+					Copy it and share it with your friends so they can join the same server easily!
+				</p>
+				<p>
+					If you create your own server, please don't close the tab while you are still playing.
+					<br/>
+					The server runs in your browser just as the client, and they communicate directly through WebRTC.
+				</p>
+			</div>
 		</div>
-		<input id="start" type="button" value="Start new server"></input>
-		<div id="clientlink"></div>
-		<table id="serverlist">
-			<tr class="tableHeader">
-				<th>Server Name</th>
-				<th>Map</th>
-				<th>Players</th>
-				<th>Region</th>
-				<th>Latency</th>
-			</tr>
-		</table>
-		
+
 		<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
 		<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js"></script>
 		<script src="webrtc.js"></script>
