@@ -1,0 +1,176 @@
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background-color: #343a40;
+  color: #aaa;
+  overflow-x: hidden;
+  font-weight: 100;
+  font-size: 1em;
+  font-family: roboto,helvetica,arial,sans-serif;
+  text-align: justify;
+}
+table {
+    border-collapse: collapse;
+    border: 2px solid #404040;
+  }
+  tr:hover {background-color:#404040;}
+  th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  td > a {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  label {
+    display: inline-block;
+    float: left;
+  }
+
+  h3{
+    color: white;
+  }
+
+  span {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  a:link{
+    color:white;
+  }
+  a:visited{
+    color: #dddddd;
+  }
+
+  #content {
+    display: inline-block;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    text-align: center;
+  }
+  #descr{
+    display: inline-block;
+    text-align: center;
+    float: right;
+    margin: 1% 1% 1% 1%;
+    width: 50%;
+  }
+
+  #conf{
+    display: inline-block;
+    width: 50%;
+    background-color: #424242;
+    border-radius: 1%;
+    border: 2px solid #404040;
+    margin: 5% 2% 1% 1%;
+    font-size: 150%;
+    text-align: center;
+  }
+
+  #servers{
+    width: 40%;
+    display: inline-block;
+    margin: 1% 1% 1% 2%;
+    float: left;
+    text-align: center;
+  }
+
+  #server-overflow{
+    overflow-y: scroll;
+    height:300px;
+  }
+
+  #block{
+    padding: 0 5% 10% 10%;
+  }
+
+  .stubbed-input{
+    width: 50%;
+    float: right;
+  }
+
+  #start{
+    margin: 5% 0 5% 0;
+  }
+
+  #goodbye{
+    padding-top: 5%;
+    text-align: center;
+    font-size: 1.25em;
+    font-weight: 100;
+  }
+
+  #header{
+    background-image:url(/assets/images/home.png);
+    min-height: 150px;
+    background-size:cover;
+    width: 100%;
+    text-align: center;
+    line-height: 150px;
+    color: white;
+  }
+  #footer{
+    font-size:1.0em;
+    text-align:center;
+    color: #ccc;
+    font-weight: 200;
+    padding: 5% 0 3% 0;
+  }
+
+  #logo{
+    width: 200px;
+    padding-bottom: 20px;
+  }
+  #cheerp{
+    width: 200px;
+    padding-bottom: 20px;
+  }
+  #cheerp-small{
+    width: 75px
+  }
+  #teeworlds{
+    width:200px;
+  }
+  #teeworlds-big{
+    width: 300px;
+  }
+  #teeworlds-small{
+    width: 50px;
+  }
+  #gamecanvas {
+    margin:0;
+    display:block;
+    -ms-touch-action:none;
+    touch-action:none;
+    -ms-content-zooming:none;
+    content-zooming:none;
+    width:100%;
+    height:100%;
+  }
+  #overlay {
+    position:fixed;
+    background:rgba(0,0,0,0.8);
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+    display:flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    font-size:32px;
+  }
+  #overlay > p {
+    font-size: 16px;
+  }
+  #overlay > h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
