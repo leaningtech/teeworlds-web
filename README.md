@@ -5,4 +5,4 @@ This is the homepage of the unofficial web version of
 
 The actual C++ code of the fork is not public at the moment.
 
-You can play the game at (TODO link).
+You can play the game at https://teeworlds.leaningtech.com/.
