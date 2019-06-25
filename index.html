@@ -31,6 +31,9 @@
 					</table>
 					</div>
 					<a id="server-link" href="#conf" class="btn btn-primary">Create a Server!</a>
+					<p id="explanation-after-creation">
+					Click on any of the above servers to join a game
+					</p>
 				</div>
 				<div id="descr">
 						<a href="https://www.teeworlds.com/" target="_blank"><img id="teeworlds" src="assets/images/teeworlds.png"></a>
@@ -103,12 +106,9 @@
 		<script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js"></script>
 		<script src="webrtc.js"></script>
 		<script>
-			function toogle_visibility(e)
+			function set_to_invisible(e)
 			{
-				if(e.style.display != 'block')
-					e.style.display = 'none';
-				else
-					e.style.display = 'block';
+				e.setAttribute('style', 'display: none');
 			}
 			var startElem = document.getElementById("start");
 			let confElem = document.getElementById("conf");
@@ -127,10 +127,12 @@
 				conf.gametype = getValueAndDisable("gametype");
 				conf.timelimit = getValueAndDisable("timelimit");
 				conf.scorelimit = getValueAndDisable("scorelimit");
-				toogle_visibility(confElem);
-				toogle_visibility(buttonServerLink);
+				//conf and the button to get to conf are disabled + they became invisible
+				set_to_invisible(confElem);
+				set_to_invisible(buttonServerLink);
 				startElem.disabled = true;
 				buttonServerLink.disabled = true;
+				document.getElementById("explanation-after-creation").setAttribute('style', 'display: inline-block');
 				if (start.promise !== undefined)
 				{
 					start.promise.then(function() {
