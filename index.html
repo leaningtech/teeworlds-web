@@ -105,18 +105,20 @@
 		<script>
 			var startElem = document.getElementById("start");
 			let confElem = document.getElementById("conf");
+			function getValueAndDisable(elemId)
+			{
+				var e = document.getElementById(elemId);
+				e.disabled = true;
+				return e.value;
+			}
 			startElem.onclick=function()
 			{
 				let conf = {};
-				for (let i = 0; i < confElem.children.length; i++)
-				{
-					let c = confElem.children[i];
-					if (c.tagName == "INPUT" || c.tagName == "SELECT")
-					{
-						conf[c.id] = c.value;
-						c.disabled = true;
-					}
-				}
+				conf.name = getValueAndDisable("name");
+				conf.map = getValueAndDisable("map");
+				conf.gametype = getValueAndDisable("gametype");
+				conf.timelimit = getValueAndDisable("timelimit");
+				conf.scorelimit = getValueAndDisable("scorelimit");
 				startElem.disabled = true;
 				if (start.promise !== undefined)
 				{
