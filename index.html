@@ -154,8 +154,28 @@
 				cols.forEach(function(n, i) {
 					var td = tr.children[i];
 					var a = td.children[0];
-					if (a.innerText != row[n])
-						a.innerText = row[n];
+					var newText = row[n];
+					if(n == "latency")
+					{
+						var l = +newText;
+						if(l < 100)
+						{
+							newText = "Good";
+							a.style.color = "green";
+						}
+						else if(l < 150)
+						{
+							newText = "Ok";
+							a.style.color = "orange";
+						}
+						else
+						{
+							newText = "Bad";
+							a.style.color = "red";
+						}
+					}
+					if (a.innerText != newText)
+						a.innerText = newText;
 				});
 			}
 			function addServerRow(row)
