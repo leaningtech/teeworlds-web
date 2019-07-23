@@ -11,10 +11,15 @@ async function main() {
         updateLoadingScreen(i);
     }
     endLoadingScreen();
+}
+function launch(conf) {
     let canvas = document.getElementById("gamecanvas");
     let ctx = canvas.getContext("2d");
     ctx.fillStyle = "blue";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.font = "30px Arial";
+    ctx.fillStyle = "white";
+    ctx.fillText(conf, 50, 50);
     let overlay = document.getElementById("overlay");
     overlay.onclick = () => {
         overlay.requestPointerLock();

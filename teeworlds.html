@@ -10,23 +10,73 @@
   <body style="height:100%;margin:0;">
   <canvas id="gamecanvas" width="800" height="600">
   </canvas>
-  <div id="overlay" ></div>
+  <div id="overlay" >
+    <div id="overlay-name">
+      <input id="overlay-input" type="text" placeholder="Enter player name"></input>
+      <button id="overlay-button">Start</input>
+    </div>
+    <div id="overlay-loading"></div>
+  </div>
   <script>
     let canvas = document.getElementById("gamecanvas");
     let overlay = document.getElementById("overlay");
+    let overlayLoading = document.getElementById("overlay-loading");
+    let overlayName = document.getElementById("overlay-name");
+    let overlayInput = document.getElementById("overlay-input");
+    let overlayButton = document.getElementById("overlay-button");
+    overlayInput.addEventListener("keydown", submitName);
+    overlayButton.addEventListener("click", submitName);
+    let nameInserted = false;
+    let name = "";
+    let server = window.location.hash.slice(1);
+    if (localStorage.getItem("firstRun") != null) {
+      nameInserted = true;
+      overlayName.style.visibility = "hidden";
+    }
+    let loadingDone = false;
     let rect = canvas.getBoundingClientRect();
     canvas.style.height = rect.height+"px";
     canvas.style.width = rect.width+"px";
 
     function startLoadingScreen()
     {
-      overlay.innerText = "Loading..."
+      overlayLoading.innerText = "Loading..."
     }
     function updateLoadingScreen(perc)
     {
-      overlay.innerText = "Loading "+(perc|0)+"%"
+      overlayLoading.innerText = "Loading "+(perc|0)+"%"
     }
     function endLoadingScreen()
+    {
+      loadingDone = true;
+      if (nameInserted)
+        doLaunch();
+    }
+    function submitName(e)
+    {
+      if (e.target == overlayInput && e.keyCode != 13)
+        return;
+      if (overlayInput.value == "")
+        return;
+      name = overlayInput.value;
+      nameInserted = true;
+      overlayInput.disabled = true;
+      overlayButton.disabled = true;
+      if (loadingDone)
+        doLaunch();
+    }
+    function doLaunch()
+    {
+      overlayInstructions();
+      localStorage.setItem("firstRun", false);
+      let conf = "cl_show_welcome 0;";
+      if (name != "")
+        conf += "player_name " + name + ';';
+      if (server != "")
+        conf += "connect " + server + ';';
+      launch(conf);
+    }
+    function overlayInstructions()
     {
       overlay.innerHTML = `
         <img id='teeworlds-small' src="assets/images/teeworlds.png">
